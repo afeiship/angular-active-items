@@ -1,0 +1,29 @@
+{
+  "name": "angular-active-items",
+  "description": "AngularJS directive used to build abstract active items.",
+  "main": "dist/angular-active-items.js",
+  "authors": [
+    "afei"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "tabs",
+    "tab",
+    "angular"
+  ],
+  "homepage": "https://github.com/afeiship/angular-active-items",
+  "moduleType": [
+    "amd"
+  ],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests",
+    "src"
+  ],
+  "dependencies": {
+    "angular": "^1.5.5"
+  }
+}
