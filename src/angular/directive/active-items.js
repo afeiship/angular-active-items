@@ -41,10 +41,10 @@
 
         function select(inItem) {
           angular.forEach($scope.items, function (item, index) {
-            item.active = false;
             if (angular.equals(item, inItem)) {
               $scope.activeIndex = index;
             }
+            item.active = false;
           });
           inItem.active = true;
         }
