@@ -1,7 +1,10 @@
 {
   "name": "angular-active-items",
   "description": "AngularJS directive used to build abstract active items.",
-  "main": "dist/angular-active-items.js",
+  "main": [
+    "dist/angular-active-items.js",
+    "dist/angular-active-items.min.js"
+  ],
   "authors": [
     "afei"
   ],
