@@ -66,8 +66,10 @@
         });
 
         $scope.$watch('activeIndex', function (inValue) {
-          var activeItem = $scope.items[inValue];
-          select(activeItem);
+          if($scope.items.length>0){
+            var activeItem = $scope.items[inValue];
+            $scope.select(activeItem);
+          }
         });
 
         function select(inItem) {

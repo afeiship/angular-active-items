@@ -62,26 +62,29 @@
 <script type="text/javascript" src="../dist/js/angular-active-items.js"></script>
 <script type="text/javascript">
   var TestModule = angular.module('TestApp', ['nx.widget'])
-    .controller('MainCtrl', function ($scope) {
+    .controller('MainCtrl', function ($timeout,$scope) {
       $scope.activeIndex =0;
-      $scope.items = [
-        {
-          title: 'Tab1',
-          active: true
-        },
-        {
-          title: 'Tab2',
-          active: false
-        },
-        {
-          title: 'Tab3',
-          active: false
-        },
-        {
-          title: 'Tab4',
-          active: false
-        }
-      ];
+      $scope.items=[];
+      $timeout(function(){
+        $scope.items=[
+          {
+            title: 'Tab1',
+            active: true
+          },
+          {
+            title: 'Tab2',
+            active: false
+          },
+          {
+            title: 'Tab3',
+            active: false
+          },
+          {
+            title: 'Tab4',
+            active: false
+          }
+        ]
+      },1000);
 
       $scope.items1 = [
         {
