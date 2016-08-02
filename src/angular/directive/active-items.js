@@ -17,6 +17,11 @@
       };
 
       function linkFn(scope, element, attrs) {
+
+        if(!angular.isDefined(scope.activeIndex)){
+          scope.activeIndex=0;
+        }
+
         scope.$on('itemClick', function (inEvent, inArgs) {
           scope.select(inArgs.item);
         });
@@ -26,18 +31,27 @@
 
         $scope.select = select;
 
+
+
         $scope.$watch('items', function (inItems) {
-          angular.forEach(inItems, function (item, index) {
-            if (item.active) {
-              $scope.index = index;
-            }
-          });
+          if(inItems && inItems.length > 0){
+            __defaultItems(inItems);
+            angular.forEach(inItems, function (item, index) {
+              if (item.active) {
+                $scope.index = index;
+              }
+            });
+          }
         });
 
         $scope.$watch('activeIndex', function (inValue) {
           if($scope.items.length>0){
             var activeItem = $scope.items[inValue];
-            $scope.select(activeItem);
+            if(inValue==-1){
+              __reset();
+            }else{
+              $scope.select(activeItem);
+            }
           }
         });
 
@@ -50,6 +64,23 @@
           });
           inItem.active = true;
         }
+
+        function __reset(){
+          angular.forEach($scope.items, function (item, index) {
+            item.active=false;
+          });
+        }
+
+        function __defaultItems(inItems){
+          var firstItem=inItems[0];
+          if(!angular.isDefined(firstItem.active)){
+            inItems.forEach(function(item){
+              item.active=false;
+            });
+            firstItem.active=true;
+          }
+        }
+
       }
 
     }]);

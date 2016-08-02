@@ -24,6 +24,7 @@
       text-align: center;
       height: 30px;
       line-height: 30px;
+      transition: all 0.3s;
     }
 
     .header [data-active=true] {
@@ -63,45 +64,39 @@
 <script type="text/javascript">
   var TestModule = angular.module('TestApp', ['nx.widget'])
     .controller('MainCtrl', function ($timeout,$scope) {
-      $scope.activeIndex =0;
+
       $scope.items=[];
       $timeout(function(){
         $scope.items=[
           {
-            title: 'Tab1',
-            active: true
+            title: 'Tab1'
           },
           {
-            title: 'Tab2',
-            active: false
+            title: 'Tab2'
           },
           {
-            title: 'Tab3',
-            active: false
+            title: 'Tab3'
           },
           {
-            title: 'Tab4',
-            active: false
+            title: 'Tab4'
           }
         ]
+
+        $scope.activeIndex =1;
       },1000);
 
       $scope.items1 = [
         {
-          content: 'content1',
-          active: true
+          content: 'content1'
         },
         {
-          content: 'content2',
-          active: false
+          content: 'content2'
         },
         {
-          content: 'content3',
-          active: false
+          content: 'content3'
         },
         {
-          content: 'content4',
-          active: false
+          content: 'content4'
         }
       ];
 
