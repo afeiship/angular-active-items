@@ -47,7 +47,8 @@
   </style>
 </head>
 <body ng-controller="MainCtrl" ng-cloak>
-<nx-active-items items="items" active-index="activeIndex" select="mySelectFn()" css-class="header">
+<!-- <nx-active-items items="items" active-index="activeIndex" select="mySelectFn()" css-class="header"> -->
+<nx-active-items items="items" active-index="activeIndex" css-class="header">
   <nx-active-item ng-repeat="item in items">
     <a href="#tab{{$index}}">{{item.title}}</a>
   </nx-active-item>
