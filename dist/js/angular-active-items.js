@@ -33,13 +33,14 @@
   'use strict';
 
   angular.module('nx.widget')
-    .directive('nxActiveItems', [function ($scope) {
+    .directive('nxActiveItems', ['$timeout',function ($timeout) {
       return {
         restrict: 'E',
         transclude: true,
         template: '<div class="nx-widget-active-items {{cssClass}}" ng-transclude></div>',
         scope: {
           items: '=',
+          select:'&',
           activeIndex: '=',
           cssClass: '@'
         },
@@ -49,18 +50,30 @@
 
       function linkFn(scope, element, attrs) {
 
+        scope.select = attrs.select ? scope.select() : select;
+
         if(!angular.isDefined(scope.activeIndex)){
-          scope.activeIndex=0;
+          scope.activeIndex = 0;
         }
 
         scope.$on('itemClick', function (inEvent, inArgs) {
           scope.select(inArgs.item);
         });
+
+
+
+        function select(inItem) {
+          angular.forEach(scope.items, function (item, index) {
+            if (angular.equals(item, inItem)) {
+              scope.activeIndex = index;
+            }
+            item.active = false;
+          });
+          inItem.active = true;
+        }
       }
 
       function controllerFn($scope) {
-
-        $scope.select = select;
 
 
 
@@ -81,20 +94,12 @@
             if(inValue==-1){
               __reset();
             }else{
-              $scope.select(activeItem);
+              if(!activeItem.active){
+                $scope.select(activeItem);
+              }
             }
           }
         });
-
-        function select(inItem) {
-          angular.forEach($scope.items, function (item, index) {
-            if (angular.equals(item, inItem)) {
-              $scope.activeIndex = index;
-            }
-            item.active = false;
-          });
-          inItem.active = true;
-        }
 
         function __reset(){
           angular.forEach($scope.items, function (item, index) {
