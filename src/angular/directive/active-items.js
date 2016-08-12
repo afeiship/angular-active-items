@@ -44,45 +44,37 @@
 
       function controllerFn($scope) {
 
-
-
         $scope.$watch('items', function (inItems) {
-          if(inItems && inItems.length > 0){
-            __defaultItems(inItems);
-            angular.forEach(inItems, function (item, index) {
-              if (item.active) {
-                $scope.index = index;
-              }
-            });
-          }
-        });
-
-        $scope.$watch('activeIndex', function (inValue) {
-          if($scope.items.length>0){
-            var activeItem = $scope.items[inValue];
-            if(inValue==-1){
-              __reset();
-            }else{
-              if(!activeItem.active){
-                $scope.select(activeItem);
-              }
+          if(inItems){
+            if(inItems.length>0){
+              setActive();
             }
           }
         });
 
-        function __reset(){
-          angular.forEach($scope.items, function (item, index) {
+        $scope.$watch('activeIndex', function (inValue) {
+          if(inValue !== -1){
+            setActive();
+          }else{
+            reset();
+          }
+        });
+
+        function reset() {
+          var items = $scope.items;
+          items.forEach(function(item,index) {
             item.active=false;
           });
+          $scope.activeIndex = -1;
         }
 
-        function __defaultItems(inItems){
-          var firstItem=inItems[0];
-          if(!angular.isDefined(firstItem.active)){
-            inItems.forEach(function(item){
-              item.active=false;
+        function setActive(){
+          var items = $scope.items;
+          var activeIndex= $scope.activeIndex;
+          if(items.length>0 && activeIndex !== -1){
+            items.forEach(function(item,index) {
+              item.active=index === activeIndex;
             });
-            firstItem.active=true;
           }
         }
 
